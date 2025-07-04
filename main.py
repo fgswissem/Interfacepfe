@@ -576,19 +576,20 @@ def main():
             help="Upload your waste collection points data in CSV format"
         )
 
-    col1, col2 = st.columns(2)
-with col1:
-    population_size = st.slider(
-        "Population size", 
-        10, 100, 30,
-        help="More generations may find better solutions but take longer"
-    )
-with col2:
-    generations = st.slider(
-        "Number of generations", 
-        5, 50, 15,
-        help="More solutions in each generation increases diversity"
-    )
+        col1, col2 = st.columns(2)
+    with col1:
+        population_size = st.slider(
+            "Population size", 
+            10, 100, 30,
+            help="More solutions in each generation increases diversity"
+        )
+    with col2:
+        generations = st.slider(
+            "Number of generations", 
+            5, 50, 15,
+            help="More generations may find better solutions but take longer"
+        )
+
 
     col1, col2 = st.columns(2)
     with col1:
