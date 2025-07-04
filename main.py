@@ -579,13 +579,13 @@ def main():
     col1, col2 = st.columns(2)
 with col1:
     population_size = st.slider(
-        "Number of generations", 
+        "Population size", 
         10, 100, 30,
         help="More generations may find better solutions but take longer"
     )
 with col2:
     generations = st.slider(
-        "Population size", 
+        "Number of generations", 
         5, 50, 15,
         help="More solutions in each generation increases diversity"
     )
