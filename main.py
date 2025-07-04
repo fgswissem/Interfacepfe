@@ -580,7 +580,7 @@ def main():
     with col1:
         generations = st.slider(
             "Number of generations", 
-            5, 50, 15
+            5, 50, 15,
             help="More generations may find better solutions but take longer"
         )
     with col2:
