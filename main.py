@@ -699,34 +699,38 @@ def display_progress_tab():
     if not st.session_state.optimization_data['complete']:
         st.info("Run the optimization to see results")
         return
-
+        
     data = st.session_state.optimization_data
     st.markdown("""
     <div class="card">
         <h3 class="card-title">Optimization Progress</h3>
     </div>
     """, unsafe_allow_html=True)
-
+    
     # Progress charts
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
-
+    
     ax1.plot(data['fitness_history'], color='#00a854', linewidth=2)
     ax1.set_title("Fitness Convergence")
     ax1.set_xlabel("Generation")
     ax1.set_ylabel("Fitness Score")
     ax1.grid(True, alpha=0.2)
-
+    
     ax2.plot(data['distance_history'], color='#3182ce', linewidth=2)
     ax2.set_title("Distance Optimization")
     ax2.set_xlabel("Generation")
     ax2.set_ylabel("Total Distance (km)")
     ax2.grid(True, alpha=0.2)
-
+    
     st.pyplot(fig)
-
-    # Metrics (temps d’exécution supprimé)
+    
+    # Metrics
     st.markdown("""
     <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-value">⏱️ {:.1f}s</div>
+            <div class="metric-label">Optimization Time</div>
+        </div>
         <div class="metric-card">
             <div class="metric-value">📏 {:.1f}km</div>
             <div class="metric-label">Total Distance</div>
@@ -745,12 +749,12 @@ def display_progress_tab():
         </div>
     </div>
     """.format(
+        data['stats']['time'],
         data['stats']['total_distance'],
         data['stats']['total_load'],
         data['stats']['num_routes'],
         data['stats']['total_distance'],
     ), unsafe_allow_html=True)
-
 
 def display_map_tab():
     if not st.session_state.optimization_data['complete']:
