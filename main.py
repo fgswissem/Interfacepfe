@@ -708,29 +708,35 @@ def display_progress_tab():
     """, unsafe_allow_html=True)
     
     st.markdown("""
-    <div class="metrics-grid">
-        <div class="metric-card">
-            <div class="metric-value">📏 {:.1f}km</div>
-            <div class="metric-label">Total Distance</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-value">🗑️ {:.1f}t</div>
-            <div class="metric-label">Total Waste</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-value">🚛 {}</div>
-            <div class="metric-label">Routes Generated</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-value">📏 401,84 km</div>
-            <div class="metric-label">Total Distance by extranet</div>
-        </div>
+<div class="metrics-grid">
+    <div class="metric-card">
+        <div class="metric-value">📏 {:.1f}km</div>
+        <div class="metric-label">Total Distance</div>
     </div>
-    """.format(
-        data['stats']['total_distance'],
-        data['stats']['total_load'],
-        data['stats']['num_routes']
-    ), unsafe_allow_html=True)
+    <div class="metric-card">
+        <div class="metric-value">🗑️ {:.1f}t</div>
+        <div class="metric-label">Total Waste</div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-value">🚛 {}</div>
+        <div class="metric-label">Routes Generated</div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-value">📏 401,84 km</div>
+        <div class="metric-label">Total Distance by extranet</div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-value">📉 {:.1f} km</div>
+        <div class="metric-label">Difference vs Extranet</div>
+    </div>
+</div>
+""".format(
+    data['stats']['total_distance'],
+    data['stats']['total_load'],
+    data['stats']['num_routes'],
+    401.84 - data['stats']['total_distance']  # 📉 différence calculée ici
+), unsafe_allow_html=True)
+
 
 def display_map_tab():
     if not st.session_state.optimization_data['complete']:
