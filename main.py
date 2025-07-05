@@ -580,13 +580,13 @@ def main():
     with col1:
         generations = st.slider(
             "Number of generations", 
-            10, 100, 30,
+            5, 50, 15,
             help="More generations may find better solutions but take longer"
         )
     with col2:
         population_size = st.slider(
             "Population size", 
-            5, 50, 15,
+            10, 100, 30,
             help="More solutions in each generation increases diversity"
         )
 
@@ -707,9 +707,6 @@ def display_progress_tab():
     </div>
     """, unsafe_allow_html=True)
     
-    # ✅ Graphs and Optimization Time removed
-
-    # ✅ Metrics (without time)
     st.markdown("""
     <div class="metrics-grid">
         <div class="metric-card">
