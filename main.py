@@ -696,6 +696,7 @@ def main():
         display_details_tab()
 
 def display_progress_tab():
+def display_progress_tab():
     if not st.session_state.optimization_data['complete']:
         st.info("Run the optimization to see results")
         return
@@ -706,45 +707,32 @@ def display_progress_tab():
         <h3 class="card-title">Optimization Progress</h3>
     </div>
     """, unsafe_allow_html=True)
-    
+
+    # ✅ Métriques (sans ⏱️ Optimization Time et sans graphiques)
     st.markdown("""
-<div class="metrics-grid">
-    <div class="metric-card">
-        <div class="metric-value">📏 {:.1f}km</div>
-        <div class="metric-label">Total Distance</div>
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-value">📏 {:.1f}km</div>
+            <div class="metric-label">Total Distance</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value">🗑️ {:.1f}t</div>
+            <div class="metric-label">Total Waste</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value">🚛 {}</div>
+            <div class="metric-label">Routes Generated</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value">📏 402,04 km</div>
+            <div class="metric-label">Total Distance by extranet</div>
+        </div>
     </div>
-    <div class="metric-card">
-        <div class="metric-value">🗑️ {:.1f}t</div>
-        <div class="metric-label">Total Waste</div>
-    </div>
-    <div class="metric-card">
-        <div class="metric-value">🚛 {}</div>
-        <div class="metric-label">Routes Generated</div>
-    </div>
-    extranet_distance = 402.04
-    difference = extranet_distance - data['stats']['total_distance']
-    difference_str = f"{difference:+.1f} km"
-
-    # Ajout de la différence avec l'extranet
-extranet_distance = 401.84
-difference = extranet_distance - data['stats']['total_distance']
-difference_str = f"{difference:+.2f} km"
-
-st.markdown(f"""
-<div class="metrics-grid">
-    <div class="metric-card">
-        <div class="metric-value">📏 {extranet_distance:.2f} km</div>
-        <div class="metric-label">Total Distance by extranet</div>
-    </div>
-    <div class="metric-card">
-        <div class="metric-value">📉 {difference_str}</div>
-        <div class="metric-label">Difference with extranet</div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-
-
+    """.format(
+        data['stats']['total_distance'],
+        data['stats']['total_load'],
+        data['stats']['num_routes']
+    ), unsafe_allow_html=True)
 def display_map_tab():
     if not st.session_state.optimization_data['complete']:
         st.info("Run the optimization to see the route map")
