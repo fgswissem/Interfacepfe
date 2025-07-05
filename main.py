@@ -735,7 +735,7 @@ difference = abs(data['stats']['total_distance'] - distance_extranet)
 st.markdown(f"""
 <div class="metrics-grid">
     <div class="metric-card" style="background-color:#fff3cd;">
-        <div class="metric-value">➖ {difference:.2f} km</div>
+        <div class="metric-value">{difference:.2f} km</div>
         <div class="metric-label">Écart de distance (Optimisation vs Extranet)</div>
     </div>
 </div>
