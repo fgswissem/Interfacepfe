@@ -708,44 +708,41 @@ def display_progress_tab():
     """, unsafe_allow_html=True)
 
     # ✅ Métriques (sans ⏱️ Optimization Time et sans graphiques)
-    st.markdown("""
-    <div class="metrics-grid">
-        <div class="metric-card">
-            <div class="metric-value">📏 {:.1f}km</div>
-            <div class="metric-label">Total Distance</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-value">🗑️ {:.1f}t</div>
-            <div class="metric-label">Total Waste</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-value">🚛 {}</div>
-            <div class="metric-label">Routes Generated</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-value">📏 402,04 km</div>
-            <div class="metric-label">Total Distance by extranet</div>
-        </div>
-    </div>
     # Calcul de la différence entre les distances
 distance_extranet = 402.04
 difference = abs(data['stats']['total_distance'] - distance_extranet)
 
-# Affichage de la métrique de différence
-st.markdown(f"""
+# Affichage des métriques avec l'écart inclus
+st.markdown("""
 <div class="metrics-grid">
+    <div class="metric-card">
+        <div class="metric-value">📏 {:.1f} km</div>
+        <div class="metric-label">Total Distance</div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-value">🗑️ {:.1f} t</div>
+        <div class="metric-label">Total Waste</div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-value">🚛 {}</div>
+        <div class="metric-label">Routes Generated</div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-value">📏 402,04 km</div>
+        <div class="metric-label">Total Distance by extranet</div>
+    </div>
     <div class="metric-card" style="background-color:#fff3cd;">
-        <div class="metric-value">km</div>
+        <div class="metric-value">➖ {:.2f} km</div>
         <div class="metric-label">Écart de distance (Optimisation vs Extranet)</div>
     </div>
 </div>
-""", unsafe_allow_html=True)
+""".format(
+    data['stats']['total_distance'],
+    data['stats']['total_load'],
+    data['stats']['num_routes'],
+    difference
+), unsafe_allow_html=True)
 
-    """.format(
-        data['stats']['total_distance'],
-        data['stats']['total_load'],
-        data['stats']['num_routes']
-    ), unsafe_allow_html=True)
 def display_map_tab():
     if not st.session_state.optimization_data['complete']:
         st.info("Run the optimization to see the route map")
