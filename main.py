@@ -699,27 +699,10 @@ def display_progress_tab():
     if not st.session_state.optimization_data['complete']:
         st.info("Run the optimization to see results")
         return
-        
-    data = st.session_state.optimization_data
-    st.markdown("""
-    <div class="card">
-        <h3 class="card-title">Optimization Progress</h3>
-    </div>
-    """, unsafe_allow_html=True)
 
-    # ✅ Métriques (sans ⏱️ Optimization Time et sans graphiques)
-    # Calcul de la différence entre les distances
-distance_extranet = 402.04
-difference = abs(data['stats']['total_distance'] - distance_extranet)
+    data = st.session_state.optimization_data  # ✅ ici data est bien défini
 
-def display_progress_tab():
-    if not st.session_state.optimization_data['complete']:
-        st.info("Run the optimization to see results")
-        return
-
-    data = st.session_state.optimization_data
-
-    # Calcul de la différence
+    # ✅ Calcul de l’écart avec la distance de référence
     distance_extranet = 402.04
     difference = abs(data['stats']['total_distance'] - distance_extranet)
 
@@ -729,6 +712,7 @@ def display_progress_tab():
     </div>
     """, unsafe_allow_html=True)
 
+    # ✅ Affichage de toutes les métriques y compris la différence
     st.markdown("""
     <div class="metrics-grid">
         <div class="metric-card">
@@ -758,6 +742,7 @@ def display_progress_tab():
         data['stats']['num_routes'],
         difference
     ), unsafe_allow_html=True)
+
 
 
 def display_map_tab():
