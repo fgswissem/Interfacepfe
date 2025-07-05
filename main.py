@@ -727,6 +727,20 @@ def display_progress_tab():
             <div class="metric-label">Total Distance by extranet</div>
         </div>
     </div>
+    # Calcul de la différence entre les distances
+distance_extranet = 402.04
+difference = abs(data['stats']['total_distance'] - distance_extranet)
+
+# Affichage de la métrique de différence
+st.markdown(f"""
+<div class="metrics-grid">
+    <div class="metric-card" style="background-color:#fff3cd;">
+        <div class="metric-value">➖ {difference:.2f} km</div>
+        <div class="metric-label">Écart de distance (Optimisation vs Extranet)</div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
     """.format(
         data['stats']['total_distance'],
         data['stats']['total_load'],
