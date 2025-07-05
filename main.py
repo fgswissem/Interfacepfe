@@ -721,21 +721,22 @@ def display_progress_tab():
         <div class="metric-value">🚛 {}</div>
         <div class="metric-label">Routes Generated</div>
     </div>
-    <div class="metric-card">
-        <div class="metric-value">📏 401,84 km</div>
-        <div class="metric-label">Total Distance by extranet</div>
+    extranet_distance = 402.04
+    difference = extranet_distance - data['stats']['total_distance']
+    difference_str = f"{difference:+.1f} km"
+
+    st.markdown(f"""
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-value">📏 402,04 km</div>
+            <div class="metric-label">Total Distance by extranet</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value">📉 {difference_str}</div>
+            <div class="metric-label">Difference with extranet</div>
+        </div>
     </div>
-    <div class="metric-card">
-        <div class="metric-value">📉 {:.1f} km</div>
-        <div class="metric-label">Difference vs Extranet</div>
-    </div>
-</div>
-""".format(
-    data['stats']['total_distance'],
-    data['stats']['total_load'],
-    data['stats']['num_routes'],
-    401.84 - data['stats']['total_distance']  # 📉 différence calculée ici
-), unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 
 def display_map_tab():
