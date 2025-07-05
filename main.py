@@ -696,7 +696,6 @@ def main():
         display_details_tab()
 
 def display_progress_tab():
-def display_progress_tab():
     if not st.session_state.optimization_data['complete']:
         st.info("Run the optimization to see results")
         return
@@ -707,8 +706,10 @@ def display_progress_tab():
         <h3 class="card-title">Optimization Progress</h3>
     </div>
     """, unsafe_allow_html=True)
+    
+    # ✅ Graphs and Optimization Time removed
 
-    # ✅ Métriques (sans ⏱️ Optimization Time et sans graphiques)
+    # ✅ Metrics (without time)
     st.markdown("""
     <div class="metrics-grid">
         <div class="metric-card">
@@ -733,6 +734,7 @@ def display_progress_tab():
         data['stats']['total_load'],
         data['stats']['num_routes']
     ), unsafe_allow_html=True)
+
 def display_map_tab():
     if not st.session_state.optimization_data['complete']:
         st.info("Run the optimization to see the route map")
