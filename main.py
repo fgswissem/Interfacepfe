@@ -580,13 +580,13 @@ def main():
     with col1:
         generations = st.slider(
             "Number of generations", 
-            5, 50, 15,
+            10, 100, 30,
             help="More generations may find better solutions but take longer"
         )
     with col2:
         population_size = st.slider(
             "Population size", 
-           10, 100, 30,
+            5, 50, 15,
             help="More solutions in each generation increases diversity"
         )
 
@@ -696,6 +696,7 @@ def main():
         display_details_tab()
 
 def display_progress_tab():
+def display_progress_tab():
     if not st.session_state.optimization_data['complete']:
         st.info("Run the optimization to see results")
         return
@@ -706,31 +707,10 @@ def display_progress_tab():
         <h3 class="card-title">Optimization Progress</h3>
     </div>
     """, unsafe_allow_html=True)
-    
-    # Progress charts
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
-    
-    ax1.plot(data['fitness_history'], color='#00a854', linewidth=2)
-    ax1.set_title("Fitness Convergence")
-    ax1.set_xlabel("Generation")
-    ax1.set_ylabel("Fitness Score")
-    ax1.grid(True, alpha=0.2)
-    
-    ax2.plot(data['distance_history'], color='#3182ce', linewidth=2)
-    ax2.set_title("Distance Optimization")
-    ax2.set_xlabel("Generation")
-    ax2.set_ylabel("Total Distance (km)")
-    ax2.grid(True, alpha=0.2)
-    
-    st.pyplot(fig)
-    
-    # Metrics
+
+    # ✅ Métriques (sans ⏱️ Optimization Time et sans graphiques)
     st.markdown("""
     <div class="metrics-grid">
-        <div class="metric-card">
-            <div class="metric-value">⏱️ {:.1f}s</div>
-            <div class="metric-label">Optimization Time</div>
-        </div>
         <div class="metric-card">
             <div class="metric-value">📏 {:.1f}km</div>
             <div class="metric-label">Total Distance</div>
@@ -749,13 +729,10 @@ def display_progress_tab():
         </div>
     </div>
     """.format(
-        data['stats']['time'],
         data['stats']['total_distance'],
         data['stats']['total_load'],
-        data['stats']['num_routes'],
-        data['stats']['total_distance'],
+        data['stats']['num_routes']
     ), unsafe_allow_html=True)
-
 def display_map_tab():
     if not st.session_state.optimization_data['complete']:
         st.info("Run the optimization to see the route map")
