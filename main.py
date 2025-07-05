@@ -712,36 +712,53 @@ def display_progress_tab():
 distance_extranet = 402.04
 difference = abs(data['stats']['total_distance'] - distance_extranet)
 
-# Affichage des métriques avec l'écart inclus
-st.markdown("""
-<div class="metrics-grid">
-    <div class="metric-card">
-        <div class="metric-value">📏 {:.1f} km</div>
-        <div class="metric-label">Total Distance</div>
+def display_progress_tab():
+    if not st.session_state.optimization_data['complete']:
+        st.info("Run the optimization to see results")
+        return
+
+    data = st.session_state.optimization_data
+
+    # Calcul de la différence
+    distance_extranet = 402.04
+    difference = abs(data['stats']['total_distance'] - distance_extranet)
+
+    st.markdown("""
+    <div class="card">
+        <h3 class="card-title">Optimization Progress</h3>
     </div>
-    <div class="metric-card">
-        <div class="metric-value">🗑️ {:.1f} t</div>
-        <div class="metric-label">Total Waste</div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-value">📏 {:.1f} km</div>
+            <div class="metric-label">Total Distance</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value">🗑️ {:.1f} t</div>
+            <div class="metric-label">Total Waste</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value">🚛 {}</div>
+            <div class="metric-label">Routes Generated</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value">📏 402,04 km</div>
+            <div class="metric-label">Total Distance by extranet</div>
+        </div>
+        <div class="metric-card" style="background-color:#fff3cd;">
+            <div class="metric-value">➖ {:.2f} km</div>
+            <div class="metric-label">Écart de distance (Optimisation vs Extranet)</div>
+        </div>
     </div>
-    <div class="metric-card">
-        <div class="metric-value">🚛 {}</div>
-        <div class="metric-label">Routes Generated</div>
-    </div>
-    <div class="metric-card">
-        <div class="metric-value">📏 402,04 km</div>
-        <div class="metric-label">Total Distance by extranet</div>
-    </div>
-    <div class="metric-card" style="background-color:#fff3cd;">
-        <div class="metric-value">➖ {:.2f} km</div>
-        <div class="metric-label">Écart de distance (Optimisation vs Extranet)</div>
-    </div>
-</div>
-""".format(
-    data['stats']['total_distance'],
-    data['stats']['total_load'],
-    data['stats']['num_routes'],
-    difference
-), unsafe_allow_html=True)
+    """.format(
+        data['stats']['total_distance'],
+        data['stats']['total_load'],
+        data['stats']['num_routes'],
+        difference
+    ), unsafe_allow_html=True)
+
 
 def display_map_tab():
     if not st.session_state.optimization_data['complete']:
