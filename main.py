@@ -696,7 +696,6 @@ def main():
         display_details_tab()
 
 def display_progress_tab():
-def display_progress_tab():
     if not st.session_state.optimization_data['complete']:
         st.info("Run the optimization to see results")
         return
